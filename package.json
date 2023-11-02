@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@huggingface/inference": "^2.6.4"
+    "@huggingface/inference": "^2.6.4",
+    "prompt-sync": "^4.2.0"
   }
 }
