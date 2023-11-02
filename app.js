@@ -8,7 +8,7 @@ async function* textStreamRes(hf, controller, input) {
   for await (const output of hf.textGenerationStream(
     {
       model: "mistralai/Mistral-7B-Instruct-v0.1",
-      inputs: "<s>[INST]Write an essay about Sartre[/INST]",
+      inputs: input,
       parameters: { max_new_tokens: 1000 },
     },
     {
@@ -25,7 +25,7 @@ let controller;
 async function run() {
   controller = new AbortController();
   const message = `<s>[INST]{:}[/INST]`;
-  const textInput = 'Write an essay about Sartre';
+  const textInput = 'Why is the sky blue?';
   const input = message.replace("{:}", textInput);
   const token = '';
   const hf = new HfInference(token);
@@ -35,6 +35,7 @@ async function run() {
       const lastToken = tokens[tokens.length - 1];
       process.stdout.write(lastToken.token.text);
     }
+    console.log(); // newline
   } catch (e) {
     console.log("aborted");
   }
